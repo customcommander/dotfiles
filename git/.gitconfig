@@ -1,0 +1,9 @@
+[alias]
+	b = branch
+	st = status
+	lg1 = log --oneline
+[user]
+	name = customcommander
+	email = hello@spinjs.com
+[core]
+        excludesFile = ~/.gitignore
