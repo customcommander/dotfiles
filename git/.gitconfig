@@ -2,8 +2,9 @@
         path = ~/.gitconfig-local
 
 [alias]
-	b = branch
-	st = status
-	lg1 = log --oneline
+        b = branch
+        st = status
+        lg1 = log --oneline
+
 [core]
         excludesFile = ~/.gitignore
