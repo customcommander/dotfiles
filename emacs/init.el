@@ -130,8 +130,7 @@
  '(safe-local-variable-values
    '((cider-clojure-cli-aliases . ":fig")
      (cider-figwheel-main-default-options . ":dev")
-     (cider-default-cljs-repl . figwheel-main)
-     (cider-clojure-cli-aliases . ":cider"))))
+     (cider-default-cljs-repl . figwheel-main))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
