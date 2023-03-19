@@ -69,11 +69,14 @@
          (clojurescript-mode . rainbow-delimiters-mode)
          (emacs-lisp-mode . rainbow-delimiters-mode)))
 
-(use-package cider)
-
 (use-package exec-path-from-shell
-  :config (when (memq window-system '(mac ns))
-            (exec-path-from-shell-initialize)))
+  :config
+  (when (memq window-system '(mac ns))
+    (exec-path-from-shell-initialize)))
+
+(use-package cider
+  :hook ((clojure-mode . cider-mode)
+         (clojurescript-mode . cider-mode)))
 
 (use-package ef-themes
   :hook (after-init . (lambda ()
