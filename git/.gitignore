@@ -12,6 +12,5 @@ target
 resources
 .nrepl-port
 .hgignore
-.dir-locals.el
 \#*\#
 .\#*
