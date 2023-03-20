@@ -79,7 +79,7 @@
 (use-package ef-themes
   :hook (after-init . (lambda ()
                         (mapcar #'disable-theme custom-enabled-themes)
-	                (load-theme 'ef-light t))))
+	                (load-theme 'ef-deuteranopia-dark t))))
 
 (use-package magit)
 
