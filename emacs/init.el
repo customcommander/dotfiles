@@ -96,6 +96,8 @@
 
 (use-package lsp-ivy)
 
+(use-package ag)
+
 ;; ivy and swipper are installed as dependencies of this package
 (use-package counsel
   :commands (swiper-isearch
