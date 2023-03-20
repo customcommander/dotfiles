@@ -116,7 +116,8 @@
   :config
   (projectile-mode +1)
   (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
-  (setq projectile-project-search-path '(("~/GitHub" . 1)))
+  (setq projectile-project-search-path '(("~/GitHub" . 1)
+                                         ("~/Code" . 1)))
   (setq projectile-completion-system 'ivy))
 
 (custom-set-variables
