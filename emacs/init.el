@@ -120,6 +120,12 @@
                                          ("~/Code" . 1)))
   (setq projectile-completion-system 'ivy))
 
+(use-package add-node-modules-path)
+
+(use-package prettier-js
+  :hook ((js-mode . add-node-modules-path)
+         (js-mode . prettier-js-mode)))
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
