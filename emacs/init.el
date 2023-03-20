@@ -7,7 +7,6 @@
 
 (require 'package)
 
-(add-to-list 'package-archives '("gnu" . "https://elpa.gnu.org/packages/"))
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 
 (package-initialize)
@@ -75,6 +74,8 @@
     (exec-path-from-shell-initialize)))
 
 (use-package cider
+  :init
+  (setq cider-auto-mode t)
   :hook ((clojure-mode . cider-mode)
          (clojurescript-mode . cider-mode)))
 
