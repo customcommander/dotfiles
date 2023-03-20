@@ -55,7 +55,8 @@
 (global-set-key (kbd "C-x k") 'kill-this-buffer)
 
 (use-package clojure-mode
-  :mode ("\\.clj[sc]?\\'" . clojure-mode))
+  :mode (("\\.cljc?\\'" . clojure-mode)
+         ("\\.cljs\\'" . clojurescript-mode)))
 
 ;; Guide: http://danmidwood.com/content/2014/11/21/animated-paredit.html
 (use-package paredit
@@ -73,11 +74,7 @@
   (when (memq window-system '(mac ns))
     (exec-path-from-shell-initialize)))
 
-(use-package cider
-  :init
-  (setq cider-auto-mode t)
-  :hook ((clojure-mode . cider-mode)
-         (clojurescript-mode . cider-mode)))
+(use-package cider)
 
 (use-package ef-themes
   :hook (after-init . (lambda ()
