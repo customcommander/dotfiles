@@ -50,6 +50,9 @@
 
 (setq windmove-wrap-around t)
 
+;; By default js-mode uses 4 spaces to indent.
+(setq js-indent-level 2)
+
 ;; The default key binding "C-x k" invokes a prompt asking which buffer to kill.
 ;; In most case the buffer I want to kill is the one I am editing.
 (global-set-key (kbd "C-x k") 'kill-this-buffer)
