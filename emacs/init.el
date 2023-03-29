@@ -99,6 +99,9 @@
 
 (use-package lsp-ivy)
 
+(use-package company
+  :hook ((after-init . global-company-mode)))
+
 (use-package ag)
 
 ;; ivy and swipper are installed as dependencies of this package
