@@ -79,10 +79,14 @@
 
 (use-package cider)
 
-(use-package ef-themes
-  :hook (after-init . (lambda ()
-                        (mapcar #'disable-theme custom-enabled-themes)
-	                (load-theme 'ef-deuteranopia-dark t))))
+(use-package nord-theme
+  :config
+  (add-to-list 'custom-theme-load-path
+               (expand-file-name "~/.emacs.d/themes/"))
+  :hook
+  (after-init . (lambda ()
+                  (mapcar #'disable-theme custom-enabled-themes)
+                  (load-theme 'nord t))))
 
 (use-package magit)
 
