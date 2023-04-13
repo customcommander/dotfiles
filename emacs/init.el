@@ -57,6 +57,9 @@
 ;; In most case the buffer I want to kill is the one I am editing.
 (global-set-key (kbd "C-x k") 'kill-this-buffer)
 
+;; https://github.com/pashky/restclient.el
+(use-package restclient)
+
 (use-package clojure-mode
   :mode (("\\.cljc?\\'" . clojure-mode)
          ("\\.cljs\\'" . clojurescript-mode)))
