@@ -1,0 +1,49 @@
+* My Config
+
+** Build & Install
+
+I am using Emacs and its literate programming capabilities to document
+and generate my configuration files.
+
+In a nutshell:
+
+1. Make changes to this file
+2. Run =M-x org-babel-tangle-file=
+3. Commit all generated files
+
+** Git
+
+*** Ignored Files & Patterns
+
+Let's start by defining the things we don't want to see checked in.
+
+**** Node.js
+
+The usual suspects...
+
+#+BEGIN_SRC text :tangle git/.gitignore :mkdirp yes
+node_modules
+#+END_SRC
+
+**** Clojure & ClojureScript
+
+#+BEGIN_SRC text :tangle git/.gitignore :mkdirp yes
+.cljs_node_repl
+.cpcache
+.lsp
+.clj-kondo
+out
+target
+resources
+.nrepl-port
+.hgignore
+#+END_SRC
+
+**** Emacs
+
+#+BEGIN_SRC text :tangle git/.gitignore :mkdirp yes
+*~
+\#*\#
+.\#*
+#+END_SRC
+

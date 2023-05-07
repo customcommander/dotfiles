@@ -1,16 +1,15 @@
-# Node.js
 node_modules
 
-# Clojure
 .cljs_node_repl
 .cpcache
 .lsp
 .clj-kondo
-*~
 out
 target
 resources
 .nrepl-port
 .hgignore
+
+*~
 \#*\#
 .\#*
