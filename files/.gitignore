@@ -1,5 +1,5 @@
+dist
 node_modules
-
 .cljs_node_repl
 .cpcache
 .lsp
@@ -9,7 +9,6 @@ target
 resources
 .nrepl-port
 .hgignore
-
 *~
 \#*\#
 .\#*

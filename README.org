@@ -1,33 +1,57 @@
-* My Config
+* My Dotfiles
 
-** Build & Install
+** Development
 
-I am using Emacs and its literate programming capabilities to document
-and generate my configuration files.
+I use Emacs and its literate programming features to generate
+all the files in the =files= directory. So do not edit these
+directly but work on this document instead. Then:
 
-In a nutshell:
+1. Run =C-c C-v t=
+2. Commit all the changes
+3. Run =make=
 
-1. Make changes to this file
-2. Run =M-x org-babel-tangle-file=
-3. Commit all generated files
+** Install
+
+1. Clone this repository (or pull the latest changes)
+2. Run =make=
+
+These are the files that will be copied over your home directory
+
+#+begin_src makefile :tangle files/Makefile :mkdirp yes
+  install: $(HOME)/.gitconfig \
+           $(HOME)/.gitconfig-local \
+           $(HOME)/.gitignore \
+           $(HOME)/.emacs.d/init.el
+#+end_src
 
 ** Git
 
-*** Ignored Files & Patterns
+My global Git configuration file will be installed in my home directory:
 
-Let's start by defining the things we don't want to see checked in.
+#+begin_src makefile :tangle files/Makefile :mkdirp yes
+  $(HOME)/.gitconfig: files/.gitconfig
+          cp -f $^ $@
+#+end_src
 
-**** Node.js
+It will make provision for local additions that
+can't be checked in for whatever reason (e.g. work stuff).
 
-The usual suspects...
+#+begin_src text :tangle files/.gitconfig :mkdirp yes
+  [include]
+          path = ~/.gitconfig-local
+#+end_src
 
-#+BEGIN_SRC text :tangle git/.gitignore :mkdirp yes
+That file also lives in my home directory:
+
+#+begin_src makefile :tangle files/Makefile
+  $(HOME)/.gitconfig-local:; touch $(HOME)/.gitconfig-local
+#+end_src
+
+These are the things I always want Git to ignore:
+
+#+begin_src text :tangle files/.gitignore :mkdirp yes
+dist
 node_modules
-#+END_SRC
-
-**** Clojure & ClojureScript
-
-#+BEGIN_SRC text :tangle git/.gitignore :mkdirp yes
 .cljs_node_repl
 .cpcache
 .lsp
@@ -37,13 +61,25 @@ target
 resources
 .nrepl-port
 .hgignore
-#+END_SRC
-
-**** Emacs
-
-#+BEGIN_SRC text :tangle git/.gitignore :mkdirp yes
-*~
+,*~
 \#*\#
 .\#*
-#+END_SRC
+#+end_src
+
+These patterns live in a file in my home directory:
+
+#+begin_src makefile :tangle files/Makefile
+  $(HOME)/.gitignore: files/.gitignore
+          cp -f $^ $@
+#+end_src
+
+And that file is referenced in my global Git configuration file:
+
+#+begin_src text :tangle files/.gitconfig :mkdirp yes
+  [core]
+          excludesFile = ~/.gitignore
+#+end_src
+
+
+
 
