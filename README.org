@@ -2,9 +2,13 @@
 
 ** Development
 
-I use Emacs and its literate programming features to generate
-all the files in the =files= directory. So do not edit these
-directly but work on this document instead. Then:
+I use Emacs and its literate programming features.
+
+The content of both the =Makefile= and the =files= directory
+is generated out of this org file, so do not edit these directly
+but work on this document instead!
+
+Then:
 
 1. Run =C-c C-v t=
 2. Commit all the changes
