@@ -138,6 +138,48 @@ then =Shift-<Arrow Left>= get you back to the first window.
   (setq windmove-wrap-around t)
 #+end_src
 
+**** Packages
+
+I use [[https://github.com/radian-software/straight.el][straight.el]] as my package manager.
+
+This is what is needed to bootstrap it:
+
+#+begin_src emacs-lisp :tangle files/init.el
+  (defvar bootstrap-version)
+
+  (let ((bootstrap-file
+         (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+        (bootstrap-version 6))
+    (unless (file-exists-p bootstrap-file)
+      (with-current-buffer
+          (url-retrieve-synchronously
+           "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
+           'silent 'inhibit-cookies)
+        (goto-char (point-max))
+        (eval-print-last-sexp)))
+    (load bootstrap-file nil 'nomessage))
+
+  ;; tell `use-package` to use `straight.el` as the package manager
+  (setq straight-use-package-by-default t)
+
+  (straight-use-package 'use-package)
+#+end_src
+
+
+Things I need for Clojure(Script) development:
+
+#+begin_src emacs-lisp :tangle files/init.el
+  (use-package clojure-mode
+    :mode (("\\.cljc?\\'" . clojure-mode)
+           ("\\.cljs\\'" . clojurescript-mode)))
+
+  (use-package rainbow-delimiters
+    :hook ((clojure-mode . rainbow-delimiters-mode)
+           (clojurescript-mode . rainbow-delimiters-mode)
+           (emacs-lisp-mode . rainbow-delimiters-mode)))
+
+#+end_src
+
 My Emacs configuration file will be put in a standard location:
 
 #+begin_src makefile :tangle files/Makefile
