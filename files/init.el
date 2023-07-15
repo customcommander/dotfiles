@@ -10,3 +10,7 @@
 (global-set-key (kbd "M-3") (lambda ()
                               (interactive)
                               (insert "#")))
+
+(windmove-default-keybindings)
+
+(setq windmove-wrap-around t)

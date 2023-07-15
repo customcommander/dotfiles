@@ -124,6 +124,20 @@ I need this as other I cannot type that character :)
                                 (insert "#")))
 #+end_src
 
+This seems to be frowned upon but I find using =Shift= and the arrow keys
+really handy to navigate the windows:
+
+#+begin_src emacs-lisp :tangle files/init.el
+  (windmove-default-keybindings)
+#+end_src
+
+This allows a "circular" navigation e.g. if you reach the last window
+then =Shift-<Arrow Left>= get you back to the first window.
+
+#+begin_src emacs-lisp :tangle files/init.el
+  (setq windmove-wrap-around t)
+#+end_src
+
 My Emacs configuration file will be put in a standard location:
 
 #+begin_src makefile :tangle files/Makefile
