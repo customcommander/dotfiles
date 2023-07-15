@@ -28,7 +28,9 @@ These are the files that will be copied over your home directory
            $(HOME)/.emacs.d/init.el
 #+end_src
 
-** Git
+** My Setup
+
+*** Git
 
 My global Git configuration file will be installed in my home directory:
 
@@ -85,5 +87,21 @@ And that file is referenced in my global Git configuration file:
 #+end_src
 
 
+*** Emacs
 
+Open Emacs maximised:
+
+#+begin_src emacs-lisp :tangle files/init.el
+  (add-to-list 'initial-frame-alist '(fullscreen . maximized))
+#+end_src
+
+Remember that what we usually refer to as a window is called a frame in Emacs parlance.
+
+My Emacs configuration file will be put in a standard location:
+
+#+begin_src makefile :tangle files/Makefile
+  $(HOME)/.emacs.d/init.el: files/init.el
+          mkdir -p $(@D)
+          cp $^ $@
+#+end_src
 
