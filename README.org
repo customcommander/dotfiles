@@ -97,10 +97,11 @@ Open Emacs maximised:
 
 /Remember that what we usually refer to as a window is called a frame in Emacs parlance./
 
-I don't find the Emacs toolbar very useful so I want to disable it:
+I don't find both Emacs toolbar & scrollbar very useful so I disable them:
 
 #+begin_src emacs-lisp :tangle files/init.el
   (tool-bar-mode -1)
+  (scroll-bar-mode -1)
 #+end_src
 
 My Emacs configuration file will be put in a standard location:
