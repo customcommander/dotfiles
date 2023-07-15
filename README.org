@@ -95,7 +95,13 @@ Open Emacs maximised:
   (add-to-list 'initial-frame-alist '(fullscreen . maximized))
 #+end_src
 
-Remember that what we usually refer to as a window is called a frame in Emacs parlance.
+/Remember that what we usually refer to as a window is called a frame in Emacs parlance./
+
+I don't find the Emacs toolbar very useful so I want to disable it:
+
+#+begin_src emacs-lisp :tangle files/init.el
+  (tool-bar-mode -1)
+#+end_src
 
 My Emacs configuration file will be put in a standard location:
 
