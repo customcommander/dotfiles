@@ -104,6 +104,18 @@ I don't find both Emacs toolbar & scrollbar very useful so I disable them:
   (scroll-bar-mode -1)
 #+end_src
 
+Disable default left and right margins:
+
+#+begin_src emacs-lisp :tangle files/init.el
+  (set-fringe-mode 0)
+#+end_src
+
+I always want to see line numbers so I enable that feature globally:
+
+#+begin_src emacs-lisp :tangle files/init.el
+  (global-display-line-numbers-mode t)
+#+end_src
+
 My Emacs configuration file will be put in a standard location:
 
 #+begin_src makefile :tangle files/Makefile
