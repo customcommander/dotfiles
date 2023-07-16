@@ -169,6 +169,8 @@ This is what is needed to bootstrap it:
 Things I need when I do Clojure(Script) development:
 
 #+begin_src emacs-lisp :tangle files/init.el
+  (use-package cider)
+
   (use-package clojure-mode
     :mode (("\\.cljc?\\'" . clojure-mode)
            ("\\.cljs\\'" . clojurescript-mode)))

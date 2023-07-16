@@ -34,6 +34,8 @@
 
 (straight-use-package 'use-package)
 
+(use-package cider)
+
 (use-package clojure-mode
   :mode (("\\.cljc?\\'" . clojure-mode)
          ("\\.cljs\\'" . clojurescript-mode)))
