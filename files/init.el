@@ -42,3 +42,8 @@
   :hook ((clojure-mode . rainbow-delimiters-mode)
          (clojurescript-mode . rainbow-delimiters-mode)
          (emacs-lisp-mode . rainbow-delimiters-mode)))
+
+(use-package paredit
+  :hook ((clojure-mode . paredit-mode)
+         (clojurescript-mode . paredit-mode)
+         (emacs-lisp-mode . paredit-mode)))

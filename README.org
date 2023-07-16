@@ -166,7 +166,7 @@ This is what is needed to bootstrap it:
 #+end_src
 
 
-Things I need for Clojure(Script) development:
+Things I need when I do Clojure(Script) development:
 
 #+begin_src emacs-lisp :tangle files/init.el
   (use-package clojure-mode
@@ -178,7 +178,13 @@ Things I need for Clojure(Script) development:
            (clojurescript-mode . rainbow-delimiters-mode)
            (emacs-lisp-mode . rainbow-delimiters-mode)))
 
+  (use-package paredit
+    :hook ((clojure-mode . paredit-mode)
+           (clojurescript-mode . paredit-mode)
+           (emacs-lisp-mode . paredit-mode)))
 #+end_src
+
+Check this [[http://danmidwood.com/content/2014/11/21/animated-paredit.html][paredit]] guide out!
 
 My Emacs configuration file will be put in a standard location:
 
