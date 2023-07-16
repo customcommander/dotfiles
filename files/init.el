@@ -47,3 +47,5 @@
   :hook ((clojure-mode . paredit-mode)
          (clojurescript-mode . paredit-mode)
          (emacs-lisp-mode . paredit-mode)))
+
+(use-package restclient)

@@ -186,6 +186,12 @@ Things I need when I do Clojure(Script) development:
 
 Check this [[http://danmidwood.com/content/2014/11/21/animated-paredit.html][paredit]] guide out!
 
+The [[https://github.com/pashky/restclient.el][restclient]] package is a nice alternative to Postman
+
+#+begin_src emacs-lisp :tangle files/init.el
+  (use-package restclient)
+#+end_src
+
 My Emacs configuration file will be put in a standard location:
 
 #+begin_src makefile :tangle files/Makefile
