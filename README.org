@@ -165,6 +165,53 @@ This is what is needed to bootstrap it:
   (straight-use-package 'use-package)
 #+end_src
 
+Let's start with some basic project management stuff:
+
+#+begin_src emacs-lisp :tangle files/init.el
+  (use-package magit)
+
+  ;; ivy and swipper are installed as dependencies of this package
+  (use-package counsel
+    :commands (swiper-isearch
+               counsel-M-x
+               counsel-find-file
+               ivy-switch-buffer)
+    :init
+    (setq ivy-use-virtual-buffers t)
+    (setq ivy-count-format "(%d/%d)")
+    :config
+    (ivy-mode 1)
+    :bind (("C-s" . swiper-isearch)
+           ("M-x" . counsel-M-x)
+           ("C-x C-f" . counsel-find-file)
+           ("C-x b" . ivy-switch-buffer)))
+
+  (use-package company
+    :hook ((after-init . global-company-mode)))
+
+  (use-package ag)
+
+  ;; IMPORTANT: language servers must be installed separately!
+  ;; e.g. clojure-lsp can be installed via brew
+  (use-package lsp-mode
+    :init
+    (setq lsp-keymap-prefix "s-l")
+    (setq lsp-headerline-breadcrumb-enable nil)
+    :hook ((clojure-mode . lsp-deferred)
+           (clojurescript-mode . lsp-deferred)
+           (js-mode . lsp-deferred))
+    :commands (lsp lsp-deferred))
+
+  (use-package lsp-ivy)
+
+  (use-package projectile
+    :config
+    (projectile-mode +1)
+    (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
+    (setq projectile-project-search-path '(("~/GitHub" . 1)
+                                           ("~/Code" . 1)))
+    (setq projectile-completion-system 'ivy))
+#+end_src
 
 Things I need when I do Clojure(Script) development:
 
