@@ -21,7 +21,7 @@ Then:
 
 These are the files that will be copied over your home directory
 
-#+begin_src makefile :tangle files/Makefile :mkdirp yes
+#+begin_src makefile :tangle Makefile :mkdirp yes
   install: $(HOME)/.gitconfig \
            $(HOME)/.gitconfig-local \
            $(HOME)/.gitignore \
@@ -34,9 +34,9 @@ These are the files that will be copied over your home directory
 
 My global Git configuration file will be installed in my home directory:
 
-#+begin_src makefile :tangle files/Makefile :mkdirp yes
+#+begin_src makefile :tangle Makefile :mkdirp yes
   $(HOME)/.gitconfig: files/.gitconfig
-          cp -f $^ $@
+	  cp -f $^ $@
 #+end_src
 
 It will make provision for local additions that
@@ -49,8 +49,8 @@ can't be checked in for whatever reason (e.g. work stuff).
 
 That file also lives in my home directory:
 
-#+begin_src makefile :tangle files/Makefile
-  $(HOME)/.gitconfig-local:; touch $(HOME)/.gitconfig-local
+#+begin_src makefile :tangle Makefile
+$(HOME)/.gitconfig-local:; touch $(HOME)/.gitconfig-local
 #+end_src
 
 These are the things I always want Git to ignore:
@@ -74,9 +74,9 @@ resources
 
 These patterns live in a file in my home directory:
 
-#+begin_src makefile :tangle files/Makefile
+#+begin_src makefile :tangle Makefile
   $(HOME)/.gitignore: files/.gitignore
-          cp -f $^ $@
+	  cp -f $^ $@
 #+end_src
 
 And that file is referenced in my global Git configuration file:
@@ -243,9 +243,9 @@ The [[https://github.com/pashky/restclient.el][restclient]] package is a nice al
 
 My Emacs configuration file will be put in a standard location:
 
-#+begin_src makefile :tangle files/Makefile
+#+begin_src makefile :tangle Makefile
   $(HOME)/.emacs.d/init.el: files/init.el
-          mkdir -p $(@D)
-          cp $^ $@
+	  mkdir -p $(@D)
+	  cp $^ $@
 #+end_src
 
