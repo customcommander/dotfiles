@@ -56,20 +56,21 @@ $(HOME)/.gitconfig-local:; touch $(HOME)/.gitconfig-local
 These are the things I always want Git to ignore:
 
 #+begin_src text :tangle files/.gitignore :mkdirp yes
-dist
-node_modules
+,*~
+.DS_Store
+.\#*
+.clj-kondo
 .cljs_node_repl
 .cpcache
-.lsp
-.clj-kondo
-out
-target
-resources
-.nrepl-port
 .hgignore
-,*~
+.lsp
+.nrepl-port
 \#*\#
-.\#*
+dist
+node_modules
+out
+resources
+target
 #+end_src
 
 These patterns live in a file in my home directory:
