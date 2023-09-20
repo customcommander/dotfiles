@@ -165,6 +165,14 @@ This is what is needed to bootstrap it:
   (straight-use-package 'use-package)
 #+end_src
 
+Indentation
+
+#+begin_src emacs-lisp :tangle files/init.el
+  (electric-indent-mode -1)
+  (setq indent-tabs-mode nil)
+  (setq tab-width 2)
+#+end_src
+
 Let's start with some basic project management stuff:
 
 #+begin_src emacs-lisp :tangle files/init.el

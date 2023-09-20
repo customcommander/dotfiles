@@ -34,6 +34,10 @@
 
 (straight-use-package 'use-package)
 
+(electric-indent-mode -1)
+(setq indent-tabs-mode nil)
+(setq tab-width 2)
+
 (use-package magit)
 
 ;; ivy and swipper are installed as dependencies of this package
