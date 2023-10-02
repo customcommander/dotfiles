@@ -58,6 +58,11 @@
 
 (mapc #'treesit-install-language-grammar (mapcar #'car treesit-language-source-alist))
 
+(use-package exec-path-from-shell
+  :init
+    (when (memq window-system '(mac ns x))
+      (exec-path-from-shell-initialize)))
+
 (use-package magit)
 
 ;; ivy and swipper are installed as dependencies of this package
@@ -101,6 +106,12 @@
   (setq projectile-project-search-path '(("~/GitHub" . 1)
                                          ("~/Code" . 1)))
   (setq projectile-completion-system 'ivy))
+
+(use-package add-node-modules-path
+  :hook (js-mode . #'add-node-modules-path))
+
+(use-package prettier-js
+  :hook ((js-mode . prettier-js-mode)))
 
 (use-package cider)
 

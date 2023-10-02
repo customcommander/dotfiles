@@ -207,6 +207,15 @@ You will need to install =tree-sitter= manually, e.g.,
   (mapc #'treesit-install-language-grammar (mapcar #'car treesit-language-source-alist))
 #+end_src
 
+Make sure Emacs can see the environment variables I have in my usual shell:
+
+#+begin_src emacs-lisp :tangle files/init.el
+  (use-package exec-path-from-shell
+    :init
+      (when (memq window-system '(mac ns x))
+        (exec-path-from-shell-initialize)))
+#+end_src
+
 Let's start with some basic project management stuff:
 
 #+begin_src emacs-lisp :tangle files/init.el
@@ -253,6 +262,26 @@ Let's start with some basic project management stuff:
     (setq projectile-project-search-path '(("~/GitHub" . 1)
                                            ("~/Code" . 1)))
     (setq projectile-completion-system 'ivy))
+#+end_src
+
+Web development.
+
+This might be occasionally useful:
+
+#+begin_src emacs-lisp :tangle files/init.el
+  (use-package add-node-modules-path
+    :hook (js-mode . #'add-node-modules-path))
+#+end_src
+
+Some projects insist on using Prettier and even go
+out of their way to integrate it with Git hooks.
+
+I need to support those projects as otherwise I will
+have a really tough time.
+
+#+begin_src emacs-lisp :tangle files/init.el
+  (use-package prettier-js
+    :hook ((js-mode . prettier-js-mode)))
 #+end_src
 
 Things I need when I do Clojure(Script) development:
