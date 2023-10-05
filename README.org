@@ -269,8 +269,9 @@ Web development.
 This might be occasionally useful:
 
 #+begin_src emacs-lisp :tangle files/init.el
-  (use-package add-node-modules-path
-    :hook (js-mode . #'add-node-modules-path))
+  (use-package prettier-js
+    :hook ((js-mode . prettier-js-mode)
+           (tsx-ts-mode . prettier-js-mode)))
 #+end_src
 
 Some projects insist on using Prettier and even go
@@ -281,7 +282,8 @@ have a really tough time.
 
 #+begin_src emacs-lisp :tangle files/init.el
   (use-package prettier-js
-    :hook ((js-mode . prettier-js-mode)))
+    :hook ((js-mode . prettier-js-mode)
+           (tsx-ts-mode . prettier-js-mode)))
 #+end_src
 
 Things I need when I do Clojure(Script) development:
