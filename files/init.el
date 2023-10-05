@@ -107,9 +107,9 @@
                                          ("~/Code" . 1)))
   (setq projectile-completion-system 'ivy))
 
-(use-package prettier-js
-  :hook ((js-mode . prettier-js-mode)
-         (tsx-ts-mode . prettier-js-mode)))
+(use-package add-node-modules-path
+  :hook ((js-mode . #'add-node-modules-path)
+         (tsx-ts-mode . #'add-node-modules-path)))
 
 (use-package prettier-js
   :hook ((js-mode . prettier-js-mode)
