@@ -134,4 +134,8 @@
          (clojurescript-mode . paredit-mode)
          (emacs-lisp-mode . paredit-mode)))
 
+(use-package janet-mode
+  :mode (("\\.janet\\'" . janet-mode))
+  :hook ((janet-mode . paredit-mode)))
+
 (use-package restclient)

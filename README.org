@@ -314,6 +314,20 @@ Things I need when I do Clojure(Script) development:
            (emacs-lisp-mode . paredit-mode)))
 #+end_src
 
+Support for the [[https://janet-lang.org/][Janet]] programming language:
+
+You need to install Janet first:
+
+#+begin_src
+  brew install janet
+#+end_src
+
+#+begin_src emacs-lisp :tangle files/init.el
+  (use-package janet-mode
+    :mode (("\\.janet\\'" . janet-mode))
+    :hook ((janet-mode . paredit-mode)))
+#+end_src
+
 Check this [[http://danmidwood.com/content/2014/11/21/animated-paredit.html][paredit]] guide out!
 
 The [[https://github.com/pashky/restclient.el][restclient]] package is a nice alternative to Postman
