@@ -325,7 +325,8 @@ You need to install Janet first:
 #+begin_src emacs-lisp :tangle files/init.el
   (use-package janet-mode
     :mode (("\\.janet\\'" . janet-mode))
-    :hook ((janet-mode . paredit-mode)))
+    :hook ((janet-mode . paredit-mode)
+           (janet-mode . rainbow-delimiters-mode)))
 #+end_src
 
 Check this [[http://danmidwood.com/content/2014/11/21/animated-paredit.html][paredit]] guide out!

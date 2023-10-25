@@ -136,6 +136,7 @@
 
 (use-package janet-mode
   :mode (("\\.janet\\'" . janet-mode))
-  :hook ((janet-mode . paredit-mode)))
+  :hook ((janet-mode . paredit-mode)
+         (janet-mode . rainbow-delimiters-mode)))
 
 (use-package restclient)
