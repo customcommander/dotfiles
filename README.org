@@ -183,6 +183,13 @@ This is what is needed to bootstrap it:
   (straight-use-package 'use-package)
 #+end_src
 
+Install and use [[https://github.com/protesilaos/ef-themes][ef-themes]] from Prot.
+
+#+begin_src emacs-lisp :tangle files/init.el
+  (use-package ef-themes
+    :init (ef-themes-select 'ef-maris-dark))
+#+end_src
+
 Not sure exactly what those are but that came with Emacs 29 apparentlty
 and I need those as otherwise I get annoying *Warning* buffer all the time.
 
