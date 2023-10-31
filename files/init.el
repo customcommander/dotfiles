@@ -42,6 +42,9 @@
 
 (straight-use-package 'use-package)
 
+(use-package ef-themes
+  :init (ef-themes-select 'ef-maris-dark))
+
 (setq treesit-language-source-alist
    '((bash "https://github.com/tree-sitter/tree-sitter-bash")
      (cmake "https://github.com/uyha/tree-sitter-cmake")
