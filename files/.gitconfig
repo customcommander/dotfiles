@@ -1,5 +1,5 @@
-[include]
-        path = ~/.gitconfig-local
+  [include]
+          path = ~/.gitconfig-local
 
-[core]
-        excludesFile = ~/.gitignore
+  [core]
+          excludesFile = ~/.gitignore

@@ -22,10 +22,12 @@ Then:
 These are the files that will be copied over your home directory
 
 #+begin_src makefile :tangle Makefile :mkdirp yes
-  install: $(HOME)/.gitconfig \
-           $(HOME)/.gitconfig-local \
-           $(HOME)/.gitignore \
-           $(HOME)/.emacs.d/init.el
+install: $(HOME)/.gitconfig \
+         $(HOME)/.gitconfig-local \
+         $(HOME)/.gitignore \
+         $(HOME)/.emacs.d/init.el \
+         $(HOME)/.yabairc \
+         $(HOME)/.skhdrc
 #+end_src
 
 ** My Setup
@@ -35,8 +37,8 @@ These are the files that will be copied over your home directory
 My global Git configuration file will be installed in my home directory:
 
 #+begin_src makefile :tangle Makefile :mkdirp yes
-  $(HOME)/.gitconfig: files/.gitconfig
-	  cp -f $^ $@
+$(HOME)/.gitconfig: files/.gitconfig
+	cp -f $^ $@
 #+end_src
 
 It will make provision for local additions that
@@ -76,8 +78,8 @@ target
 These patterns live in a file in my home directory:
 
 #+begin_src makefile :tangle Makefile
-  $(HOME)/.gitignore: files/.gitignore
-	  cp -f $^ $@
+$(HOME)/.gitignore: files/.gitignore
+	cp -f $^ $@
 #+end_src
 
 And that file is referenced in my global Git configuration file:
@@ -87,6 +89,112 @@ And that file is referenced in my global Git configuration file:
           excludesFile = ~/.gitignore
 #+end_src
 
+*** yabai
+
+[[https://github.com/koekeishiya/yabai][yabai]] is an extension to the native macOS window manager.
+
+Assuming brew is installed, run:
+
+#+begin_src
+brew install koekeishiya/formulae/yabai
+#+end_src
+
+Then run: (an Accessibility prompt will pop up)
+
+#+begin_src
+yabai --start-service
+#+end_src
+
+Use binary space partitioning:
+
+#+begin_src text :tangle files/.yabairc :mkdirp yes
+yabai -m config layout bsp
+#+end_src
+
+New window appears on the right (or bottom):
+
+#+begin_src text :tangle files/.yabairc :mkdirp yes
+yabai -m config window_placement second_child
+#+end_src
+
+Space around and in between windows:
+
+#+begin_src text :tangle files/.yabairc :mkdirp yes
+yabai -m config top_padding    2
+yabai -m config bottom_padding 2
+yabai -m config left_padding   2
+yabai -m config right_padding  2
+yabai -m config window_gap     2
+#+end_src
+
+When I focus on a window, the mouse is on that window:
+
+#+begin_src text :tangle files/.yabairc :mkdirp yes
+yabai -m config mouse_follows_focus on
+#+end_src
+
+Apps I don't want yabai to manage:
+
+#+begin_src text :tangle files/.yabairc :mkdirp yes
+yabai -m rule --add app="^System Settings$" manage=off
+yabai -m rule --add app="^zoom.us$" manage=off
+yabai -m rule --add app="^Calculator$" manage=off
+#+end_src
+
+For some reasons, some apps don't get automatically managed by yabai unless we explicitly tell it to:
+
+#+begin_src text :tangle files/.yabairc :mkdirp yes
+yabai -m rule --add app="^Emacs$" manage=on
+#+end_src
+
+Install yabai config file:
+
+#+begin_src makefile :tangle Makefile
+$(HOME)/.yabairc: files/.yabairc
+	cp -f $^ $@
+	chmod +x $@
+#+end_src
+
+*** skhd
+
+[[https://github.com/koekeishiya/skhd][skhd]] is a utility that I use to map keys.
+
+Assuming brew is installed, run:
+
+#+begin_src
+brew install koekeishiya/formulae/skhd
+#+end_src
+
+Then run: (an Accessibility prompt will pop up)
+
+#+begin_src
+skhd --start-service
+#+end_src
+
+Change window focus in current space:
+
+#+begin_src text :tangle files/.skhdrc :mkdirp yes
+ctrl + cmd - up    : yabai -m window --focus north
+ctrl + cmd - down  : yabai -m window --focus south
+ctrl + cmd - left  : yabai -m window --focus west
+ctrl + cmd - right : yabai -m window --focus east
+#+end_src
+
+Change display focus:
+
+#+begin_src text :tangle files/.skhdrc :mkdirp yes
+alt + cmd - up    : yabai -m display --focus north
+alt + cmd - down  : yabai -m display --focus south
+alt + cmd - left  : yabai -m display --focus west
+alt + cmd - right : yabai -m display --focus east
+#+end_src
+
+Install skhd config file:
+
+#+begin_src makefile :tangle Makefile
+$(HOME)/.skhdrc: files/.skhdrc
+	cp -f $^ $@
+#+end_src
 
 *** Emacs
 
@@ -231,6 +339,12 @@ Make sure Emacs can see the environment variables I have in my usual shell:
         (exec-path-from-shell-initialize)))
 #+end_src
 
+Prevents org-mode from adding extra indentation:
+
+#+begin_src emacs-lisp :tangle files/init.el
+(setq org-src-preserve-indentation t)
+#+end_src
+
 Let's start with some basic project management stuff:
 
 #+begin_src emacs-lisp :tangle files/init.el
@@ -347,8 +461,8 @@ The [[https://github.com/pashky/restclient.el][restclient]] package is a nice al
 My Emacs configuration file will be put in a standard location:
 
 #+begin_src makefile :tangle Makefile
-  $(HOME)/.emacs.d/init.el: files/init.el
-	  mkdir -p $(@D)
-	  cp $^ $@
+$(HOME)/.emacs.d/init.el: files/init.el
+	mkdir -p $(@D)
+	cp $^ $@
 #+end_src
 
