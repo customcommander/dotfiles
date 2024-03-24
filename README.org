@@ -466,3 +466,14 @@ $(HOME)/.emacs.d/init.el: files/init.el
 	cp $^ $@
 #+end_src
 
+**** Misc
+
+See https://emacsredux.com/blog/2024/03/11/tracking-world-time-with-emacs/
+
+#+begin_src emacs-lisp :tangle files/init.el
+(setq world-clock-list
+      '(("Europe/London" "London")
+        ("Europe/Brussels" "Brussels")
+        ("Europe/Kiev" "Kiev")
+        ("Asia/Seoul" "Seoul")))
+#+end_src

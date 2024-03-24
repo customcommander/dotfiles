@@ -145,3 +145,9 @@
            (janet-mode . rainbow-delimiters-mode)))
 
   (use-package restclient)
+
+(setq world-clock-list
+      '(("Europe/London" "London")
+        ("Europe/Brussels" "Brussels")
+        ("Europe/Kiev" "Kiev")
+        ("Asia/Seoul" "Seoul")))
