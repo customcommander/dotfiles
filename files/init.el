@@ -102,7 +102,8 @@
     (setq lsp-headerline-breadcrumb-enable nil)
     :hook ((clojure-mode . lsp-deferred)
            (clojurescript-mode . lsp-deferred)
-           (js-mode . lsp-deferred))
+           (js-mode . lsp-deferred)
+           (tsx-ts-mode . lsp-deferred))
     :commands (lsp lsp-deferred))
 
   (use-package lsp-ivy)
