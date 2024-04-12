@@ -42,6 +42,54 @@
 
   (straight-use-package 'use-package)
 
+(set-frame-font "Fira Code")
+
+(use-package ligature
+  :init
+  ;; Enable the www ligature in every possible major mode
+  (ligature-set-ligatures 't '("www"))
+
+  ;; Enable ligatures in programming modes                                                           
+  (ligature-set-ligatures 'prog-mode '("www" "**" "***" "**/" "*>" "*/" "\\\\" "\\\\\\" "{-" "::"
+                                       ":::" ":=" "!!" "!=" "!==" "-}" "----" "-->" "->" "->>"
+                                       "-<" "-<<" "-~" "#{" "#[" "##" "###" "####" "#(" "#?" "#_"
+                                       "#_(" ".-" ".=" ".." "..<" "..." "?=" "??" ";;" "/*" "/**"
+                                       "/=" "/==" "/>" "//" "///" "&&" "||" "||=" "|=" "|>" "^=" "$>"
+                                       "++" "+++" "+>" "=:=" "==" "===" "==>" "=>" "=>>" "<="
+                                       "=<<" "=/=" ">-" ">=" ">=>" ">>" ">>-" ">>=" ">>>" "<*"
+                                       "<*>" "<|" "<|>" "<$" "<$>" "<!--" "<-" "<--" "<->" "<+"
+                                       "<+>" "<=" "<==" "<=>" "<=<" "<>" "<<" "<<-" "<<=" "<<<"
+                                       "<~" "<~~" "</" "</>" "~@" "~-" "~>" "~~" "~~>" "%%"))
+  
+  (global-ligature-mode 't)
+)
+
+(use-package vertico
+  :ensure t
+  :init
+  (vertico-mode t)
+  :custom
+  (vertico-cycle t) ; goes back to the top when reaching the end of minibuffer
+  )
+
+(use-package marginalia
+  :ensure t
+  :init
+  (marginalia-mode t))
+
+(use-package orderless
+  :ensure t
+  :config
+  (setq completion-styles '(orderless basic)))
+
+(use-package consult
+  :bind (("C-x b" . consult-buffer)
+         ("C-s" . consult-line)))
+
+(use-package which-key
+  :init
+  (which-key-mode t))
+
   (use-package ef-themes
     :init (ef-themes-select 'ef-maris-dark))
 
@@ -72,49 +120,6 @@
 (setq org-src-preserve-indentation t)
 
   (use-package magit)
-
-  ;; ivy and swipper are installed as dependencies of this package
-  (use-package counsel
-    :commands (swiper-isearch
-               counsel-M-x
-               counsel-find-file
-               ivy-switch-buffer)
-    :init
-    (setq ivy-use-virtual-buffers t)
-    (setq ivy-count-format "(%d/%d)")
-    :config
-    (ivy-mode 1)
-    :bind (("C-s" . swiper-isearch)
-           ("M-x" . counsel-M-x)
-           ("C-x C-f" . counsel-find-file)
-           ("C-x b" . ivy-switch-buffer)))
-
-  (use-package company
-    :hook ((after-init . global-company-mode)))
-
-  (use-package ag)
-
-  ;; IMPORTANT: language servers must be installed separately!
-  ;; e.g. clojure-lsp can be installed via brew
-  (use-package lsp-mode
-    :init
-    (setq lsp-keymap-prefix "s-l")
-    (setq lsp-headerline-breadcrumb-enable nil)
-    :hook ((clojure-mode . lsp-deferred)
-           (clojurescript-mode . lsp-deferred)
-           (js-mode . lsp-deferred)
-           (tsx-ts-mode . lsp-deferred))
-    :commands (lsp lsp-deferred))
-
-  (use-package lsp-ivy)
-
-  (use-package projectile
-    :config
-    (projectile-mode +1)
-    (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
-    (setq projectile-project-search-path '(("~/GitHub" . 1)
-                                           ("~/Code" . 1)))
-    (setq projectile-completion-system 'ivy))
 
   (use-package add-node-modules-path
     :hook ((js-mode . #'add-node-modules-path)
