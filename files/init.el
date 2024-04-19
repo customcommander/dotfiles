@@ -119,7 +119,16 @@
 
 (setq org-src-preserve-indentation t)
 
-  (use-package magit)
+  (use-package magit
+    :init
+    (with-eval-after-load 'project
+      (keymap-set project-prefix-map "m" #'magit-project-status)
+      (keymap-set project-prefix-map "g" #'consult-ripgrep)
+      (setq project-switch-commands '((magit-project-status "Magit")
+                                      (project-find-file "Find file")
+                                      (consult-ripgrep "Find rg")
+                                      (project-find-dir "Find dir")
+                                      (project-eshell "Eshell")))))
 
   (use-package add-node-modules-path
     :hook ((js-mode . #'add-node-modules-path)
