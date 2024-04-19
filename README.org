@@ -431,7 +431,16 @@ Prevents org-mode from adding extra indentation:
 Let's start with some basic project management stuff:
 
 #+begin_src emacs-lisp :tangle files/init.el
-  (use-package magit)
+  (use-package magit
+    :init
+    (with-eval-after-load 'project
+      (keymap-set project-prefix-map "m" #'magit-project-status)
+      (keymap-set project-prefix-map "g" #'consult-ripgrep)
+      (setq project-switch-commands '((magit-project-status "Magit")
+                                      (project-find-file "Find file")
+                                      (consult-ripgrep "Find rg")
+                                      (project-find-dir "Find dir")
+                                      (project-eshell "Eshell")))))
 #+end_src
 
 Web development.
