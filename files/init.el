@@ -42,7 +42,7 @@
 
   (straight-use-package 'use-package)
 
-(set-frame-font "Fira Code")
+(set-frame-font "Fira Code:size=14")
 
 (use-package ligature
   :init
