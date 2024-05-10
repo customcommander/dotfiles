@@ -443,6 +443,24 @@ Let's start with some basic project management stuff:
                                       (project-eshell "Eshell")))))
 #+end_src
 
+***** Embark
+
+#+begin_src emacs-lisp :tangle files/init.el
+
+(use-package embark
+  :straight t
+  :bind
+  (("C-." . embark-act)
+   ("C-h B" . embark-bindings))
+  :init
+  (setq prefix-help-command #'embark-prefix-help-command))
+
+(use-package embark-consult)
+
+(use-package wgrep)
+
+#+end_src
+
 Web development.
 
 This might be occasionally useful:

@@ -130,6 +130,18 @@
                                       (project-find-dir "Find dir")
                                       (project-eshell "Eshell")))))
 
+(use-package embark
+  :straight t
+  :bind
+  (("C-." . embark-act)
+   ("C-h B" . embark-bindings))
+  :init
+  (setq prefix-help-command #'embark-prefix-help-command))
+
+(use-package embark-consult)
+
+(use-package wgrep)
+
   (use-package add-node-modules-path
     :hook ((js-mode . #'add-node-modules-path)
            (tsx-ts-mode . #'add-node-modules-path)))
