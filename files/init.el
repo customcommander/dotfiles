@@ -128,7 +128,7 @@
                                       (project-find-file "Find file")
                                       (consult-ripgrep "Find rg")
                                       (project-find-dir "Find dir")
-                                      (project-eshell "Eshell")))))
+                                      (project-shell "Shell")))))
 
 (use-package embark
   :straight t
