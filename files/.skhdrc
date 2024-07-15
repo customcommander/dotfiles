@@ -1,9 +1,0 @@
-ctrl + cmd - up    : yabai -m window --focus north
-ctrl + cmd - down  : yabai -m window --focus south
-ctrl + cmd - left  : yabai -m window --focus west
-ctrl + cmd - right : yabai -m window --focus east
-
-alt + cmd - up    : yabai -m display --focus north
-alt + cmd - down  : yabai -m display --focus south
-alt + cmd - left  : yabai -m display --focus west
-alt + cmd - right : yabai -m display --focus east
