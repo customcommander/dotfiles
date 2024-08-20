@@ -356,12 +356,21 @@ Let's start with some basic project management stuff:
 
 Web development.
 
+The major mode `tsx-ts-mode` comes with Emacs 29.1 and is what I will use
+for both JavaScript and TypeScript source files. React is also supported.
+
+New entries are added at the beginning of the list and so will take
+precedence over any default entries from Emacs.
+
+#+begin_src emacs-lisp :tangle files/init.el
+(add-to-list 'auto-mode-alist '("\\.[jt]sx?" . tsx-ts-mode))
+#+end_src
+
 This might be occasionally useful:
 
 #+begin_src emacs-lisp :tangle files/init.el
   (use-package add-node-modules-path
-    :hook ((js-mode . #'add-node-modules-path)
-           (tsx-ts-mode . #'add-node-modules-path)))
+    :hook ((tsx-ts-mode . #'add-node-modules-path)))
 #+end_src
 
 Some projects insist on using Prettier and even go
@@ -372,8 +381,7 @@ have a really tough time.
 
 #+begin_src emacs-lisp :tangle files/init.el
   (use-package prettier-js
-    :hook ((js-mode . prettier-js-mode)
-           (tsx-ts-mode . prettier-js-mode)))
+    :hook ((tsx-ts-mode . prettier-js-mode)))
 #+end_src
 
 Things I need when I do Clojure(Script) development:
