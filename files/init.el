@@ -142,13 +142,13 @@
 
 (use-package wgrep)
 
+(add-to-list 'auto-mode-alist '("\\.[jt]sx?" . tsx-ts-mode))
+
   (use-package add-node-modules-path
-    :hook ((js-mode . #'add-node-modules-path)
-           (tsx-ts-mode . #'add-node-modules-path)))
+    :hook ((tsx-ts-mode . #'add-node-modules-path)))
 
   (use-package prettier-js
-    :hook ((js-mode . prettier-js-mode)
-           (tsx-ts-mode . prettier-js-mode)))
+    :hook ((tsx-ts-mode . prettier-js-mode)))
 
   (use-package cider)
 
