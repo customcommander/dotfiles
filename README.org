@@ -25,9 +25,7 @@ These are the files that will be copied over your home directory
 install: $(HOME)/.gitconfig \
          $(HOME)/.gitconfig-local \
          $(HOME)/.gitignore \
-         $(HOME)/.emacs.d/init.el \
-         $(HOME)/.yabairc \
-         $(HOME)/.skhdrc
+         $(HOME)/.emacs.d/init.el
 #+end_src
 
 ** My Setup

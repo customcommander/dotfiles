@@ -1,9 +1,7 @@
 install: $(HOME)/.gitconfig \
          $(HOME)/.gitconfig-local \
          $(HOME)/.gitignore \
-         $(HOME)/.emacs.d/init.el \
-         $(HOME)/.yabairc \
-         $(HOME)/.skhdrc
+         $(HOME)/.emacs.d/init.el
 
 $(HOME)/.gitconfig: files/.gitconfig
 	cp -f $^ $@
