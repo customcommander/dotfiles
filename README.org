@@ -433,10 +433,39 @@ You need to install Janet first:
 
 Check this [[http://danmidwood.com/content/2014/11/21/animated-paredit.html][paredit]] guide out!
 
+*** restclient
+
 The [[https://github.com/pashky/restclient.el][restclient]] package is a nice alternative to Postman
 
 #+begin_src emacs-lisp :tangle files/init.el
   (use-package restclient)
+#+end_src
+
+
+*** ob-restclient
+
+I use this package to execute restclient source blocks in org-mode.
+
+Note: you can add a jq filter via a source header e.g. ==:jq .==
+
+#+begin_src emacs-lisp :tangle files/init.el
+(use-package ob-restclient
+  :config
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((restclient . t))))
+#+end_src
+
+*** jq-mode
+
+This package also provides org-babel support for jq
+
+#+begin_src emacs-lisp :tangle files/init.el
+(use-package jq-mode
+  :config
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((jq . t))))
 #+end_src
 
 My Emacs configuration file will be put in a standard location:

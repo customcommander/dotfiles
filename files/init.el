@@ -185,6 +185,18 @@
 
   (use-package restclient)
 
+(use-package ob-restclient
+  :config
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((restclient . t))))
+
+(use-package jq-mode
+  :config
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((jq . t))))
+
 (setq world-clock-list
       '(("Europe/London" "London")
         ("Europe/Brussels" "Brussels")
