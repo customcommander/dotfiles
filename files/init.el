@@ -119,6 +119,12 @@
 (use-package corfu
   :init
   (global-corfu-mode)
+  :bind
+  (:map corfu-map
+        ("RET" . (lambda ()
+                   (interactive)
+                   (corfu-quit)
+                   (newline-and-indent))))
   :config
   (setq corfu-auto t))
 
