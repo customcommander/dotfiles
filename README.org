@@ -244,11 +244,16 @@ Provide fuzzy search:
 
 #+end_src
 
-qq
+***** consult
+
+=consult-xref= is nice alternative to a plain =*xref*= buffer, especially
+when combined with =lsp-mode=!
 
 #+begin_src emacs-lisp :tangle files/init.el
-
 (use-package consult
+  :init
+  (setq xref-show-xrefs-function #'consult-xref
+        xref-show-definitions-function #'consult-xref)
   :bind (("C-x b" . consult-buffer)
          ("C-s" . consult-line)))
 
