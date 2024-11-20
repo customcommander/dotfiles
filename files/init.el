@@ -83,6 +83,9 @@
   (setq completion-styles '(orderless basic)))
 
 (use-package consult
+  :init
+  (setq xref-show-xrefs-function #'consult-xref
+        xref-show-definitions-function #'consult-xref)
   :bind (("C-x b" . consult-buffer)
          ("C-s" . consult-line)))
 
