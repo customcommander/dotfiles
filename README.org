@@ -302,7 +302,7 @@ See https://www.masteringemacs.org/article/how-to-get-started-tree-sitter
 
 #+begin_src emacs-lisp :tangle files/init.el
 (use-package lsp-mode
-  :commands (lsp lsp-deferred)
+  :commands lsp
   :init
   (setq lsp-keymap-prefix "C-c l")
   :config
@@ -386,7 +386,7 @@ precedence over any default entries from Emacs.
 Activate lsp
 
 #+begin_src emacs-lisp :tangle files/init.el
-(add-hook 'tsx-ts-mode-hook 'lsp-deferred)
+(add-hook 'tsx-ts-mode-hook 'lsp)
 #+end_src
 
 This might be occasionally useful:

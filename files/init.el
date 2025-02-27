@@ -113,7 +113,7 @@
   (mapc #'treesit-install-language-grammar (mapcar #'car treesit-language-source-alist))
 
 (use-package lsp-mode
-  :commands (lsp lsp-deferred)
+  :commands lsp
   :init
   (setq lsp-keymap-prefix "C-c l")
   :config
@@ -163,7 +163,7 @@
 
 (add-to-list 'auto-mode-alist '("\\.[jt]s[x]?\\'" . tsx-ts-mode))
 
-(add-hook 'tsx-ts-mode-hook 'lsp-deferred)
+(add-hook 'tsx-ts-mode-hook 'lsp)
 
   (use-package add-node-modules-path
     :hook ((tsx-ts-mode . #'add-node-modules-path)))
