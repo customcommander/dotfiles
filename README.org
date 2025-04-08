@@ -296,7 +296,8 @@ Install and use [[https://github.com/protesilaos/ef-themes][ef-themes]] from Pro
   :init
   (setq lsp-keymap-prefix "C-c l")
   :hook ((typescript-ts-mode . lsp)
-         (clojure-mode . lsp))
+         (tsx-ts-mode        . lsp)
+         (clojure-mode       . lsp))
   :config
   (lsp-enable-which-key-integration t))
 #+end_src
@@ -374,8 +375,8 @@ precedence over any default entries from Emacs.
 #+begin_src emacs-lisp :tangle files/init.el
 (dolist (pair '(("\\.js\\'"  . typescript-ts-mode)
                 ("\\.ts\\'"  . typescript-ts-mode)
-                ("\\.jsx\\'" . typescript-ts-mode)
-                ("\\.tsx\\'" . typescript-ts-mode)))
+                ("\\.jsx\\'" . tsx-ts-mode)
+                ("\\.tsx\\'" . tsx-ts-mode)))
   (add-to-list 'auto-mode-alist pair))
 #+end_src
 
@@ -394,7 +395,8 @@ have a really tough time.
 
 #+begin_src emacs-lisp :tangle files/init.el
 (use-package prettier-js
-  :hook ((typescript-ts-mode . prettier-js-mode)))
+  :hook ((typescript-ts-mode . prettier-js-mode)
+         (tsx-ts-mode . prettier-js-mode)))
 #+end_src
 
 Things I need when I do Clojure(Script) development:
@@ -419,10 +421,10 @@ You need to install Janet first:
 #+end_src
 
 #+begin_src emacs-lisp :tangle files/init.el
-  (use-package janet-mode
-    :mode (("\\.janet\\'" . janet-mode))
-    :hook ((janet-mode . paredit-mode)
-           (janet-mode . rainbow-delimiters-mode)))
+(use-package janet-mode
+  :mode (("\\.janet\\'" . janet-mode))
+  :hook ((janet-mode . paredit-mode)
+         (janet-mode . rainbow-delimiters-mode)))
 #+end_src
 
 Check this [[http://danmidwood.com/content/2014/11/21/animated-paredit.html][paredit]] guide out!

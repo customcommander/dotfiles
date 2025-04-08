@@ -106,7 +106,8 @@
   :init
   (setq lsp-keymap-prefix "C-c l")
   :hook ((typescript-ts-mode . lsp)
-         (clojure-mode . lsp))
+         (tsx-ts-mode        . lsp)
+         (clojure-mode       . lsp))
   :config
   (lsp-enable-which-key-integration t))
 
@@ -154,15 +155,16 @@
 
 (dolist (pair '(("\\.js\\'"  . typescript-ts-mode)
                 ("\\.ts\\'"  . typescript-ts-mode)
-                ("\\.jsx\\'" . typescript-ts-mode)
-                ("\\.tsx\\'" . typescript-ts-mode)))
+                ("\\.jsx\\'" . tsx-ts-mode)
+                ("\\.tsx\\'" . tsx-ts-mode)))
   (add-to-list 'auto-mode-alist pair))
 
 (use-package add-node-modules-path
   :hook ((typescript-ts-mode . add-node-modules-path)))
 
 (use-package prettier-js
-  :hook ((typescript-ts-mode . prettier-js-mode)))
+  :hook ((typescript-ts-mode . prettier-js-mode)
+         (tsx-ts-mode . prettier-js-mode)))
 
 (use-package cider)
 (use-package rainbow-delimiters)
@@ -173,10 +175,10 @@
          (clojure-ts-mode . paredit-mode)
          (clojure-ts-mode . cider-mode)))
 
-  (use-package janet-mode
-    :mode (("\\.janet\\'" . janet-mode))
-    :hook ((janet-mode . paredit-mode)
-           (janet-mode . rainbow-delimiters-mode)))
+(use-package janet-mode
+  :mode (("\\.janet\\'" . janet-mode))
+  :hook ((janet-mode . paredit-mode)
+         (janet-mode . rainbow-delimiters-mode)))
 
   (use-package restclient)
 
