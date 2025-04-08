@@ -30,6 +30,12 @@ install: $(HOME)/.gitconfig \
 
 ** My Setup
 
+*** Manual Install
+
+#+begin_src shell
+brew install clojure-lsp/brew/clojure-lsp-native
+#+end_src
+
 *** Git
 
 My global Git configuration file will be installed in my home directory:
@@ -136,6 +142,13 @@ then =Shift-<Arrow Left>= get you back to the first window.
 
 #+begin_src emacs-lisp :tangle files/init.el
   (setq windmove-wrap-around t)
+#+end_src
+
+#+begin_src emacs-lisp :tangle files/init.el
+(setq treesit-language-source-alist
+      '((tsx "https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src")))
+
+(mapc #'treesit-install-language-grammar (mapcar #'car treesit-language-source-alist))
 #+end_src
 
 Indentation
@@ -277,34 +290,13 @@ Install and use [[https://github.com/protesilaos/ef-themes][ef-themes]] from Pro
     :init (ef-themes-select 'ef-maris-dark))
 #+end_src
 
-Not sure exactly what those are but that came with Emacs 29 apparentlty
-and I need those as otherwise I get annoying *Warning* buffer all the time.
-
-See https://www.masteringemacs.org/article/how-to-get-started-tree-sitter
-
-#+begin_src emacs-lisp :tangle files/init.el
-  (setq treesit-language-source-alist
-     '((bash "https://github.com/tree-sitter/tree-sitter-bash")
-       (css "https://github.com/tree-sitter/tree-sitter-css")
-       (elisp "https://github.com/Wilfred/tree-sitter-elisp")
-       (html "https://github.com/tree-sitter/tree-sitter-html")
-       (javascript "https://github.com/tree-sitter/tree-sitter-javascript" "master" "src")
-       (json "https://github.com/tree-sitter/tree-sitter-json")
-       (make "https://github.com/alemuller/tree-sitter-make")
-       (markdown "https://github.com/ikatyang/tree-sitter-markdown")
-       (python "https://github.com/tree-sitter/tree-sitter-python")
-       (tsx "https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src")
-       (typescript "https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src")
-       (yaml "https://github.com/ikatyang/tree-sitter-yaml")))
-
-  (mapc #'treesit-install-language-grammar (mapcar #'car treesit-language-source-alist))
-#+end_src
-
 #+begin_src emacs-lisp :tangle files/init.el
 (use-package lsp-mode
   :commands lsp
   :init
   (setq lsp-keymap-prefix "C-c l")
+  :hook ((typescript-ts-mode . lsp)
+         (clojure-mode . lsp))
   :config
   (lsp-enable-which-key-integration t))
 #+end_src
@@ -373,27 +365,25 @@ Let's start with some basic project management stuff:
 
 Web development.
 
-The major mode `tsx-ts-mode` comes with Emacs 29.1 and is what I will use
+The major mode `typescript-ts-mode` comes with Emacs 29.1 and is what I will use
 for both JavaScript and TypeScript source files. React is also supported.
 
 New entries are added at the beginning of the list and so will take
 precedence over any default entries from Emacs.
 
 #+begin_src emacs-lisp :tangle files/init.el
-(add-to-list 'auto-mode-alist '("\\.[jt]s[x]?\\'" . tsx-ts-mode))
-#+end_src
-
-Activate lsp
-
-#+begin_src emacs-lisp :tangle files/init.el
-(add-hook 'tsx-ts-mode-hook 'lsp)
+(dolist (pair '(("\\.js\\'"  . typescript-ts-mode)
+                ("\\.ts\\'"  . typescript-ts-mode)
+                ("\\.jsx\\'" . typescript-ts-mode)
+                ("\\.tsx\\'" . typescript-ts-mode)))
+  (add-to-list 'auto-mode-alist pair))
 #+end_src
 
 This might be occasionally useful:
 
 #+begin_src emacs-lisp :tangle files/init.el
-  (use-package add-node-modules-path
-    :hook ((tsx-ts-mode . #'add-node-modules-path)))
+(use-package add-node-modules-path
+  :hook ((typescript-ts-mode . add-node-modules-path)))
 #+end_src
 
 Some projects insist on using Prettier and even go
@@ -403,28 +393,21 @@ I need to support those projects as otherwise I will
 have a really tough time.
 
 #+begin_src emacs-lisp :tangle files/init.el
-  (use-package prettier-js
-    :hook ((tsx-ts-mode . prettier-js-mode)))
+(use-package prettier-js
+  :hook ((typescript-ts-mode . prettier-js-mode)))
 #+end_src
 
 Things I need when I do Clojure(Script) development:
 
 #+begin_src emacs-lisp :tangle files/init.el
-  (use-package cider)
+(use-package cider)
+(use-package rainbow-delimiters)
+(use-package paredit)
 
-  (use-package clojure-mode
-    :mode (("\\.cljc?\\'" . clojure-mode)
-           ("\\.cljs\\'" . clojurescript-mode)))
-
-  (use-package rainbow-delimiters
-    :hook ((clojure-mode . rainbow-delimiters-mode)
-           (clojurescript-mode . rainbow-delimiters-mode)
-           (emacs-lisp-mode . rainbow-delimiters-mode)))
-
-  (use-package paredit
-    :hook ((clojure-mode . paredit-mode)
-           (clojurescript-mode . paredit-mode)
-           (emacs-lisp-mode . paredit-mode)))
+(use-package clojure-ts-mode
+  :hook ((clojure-ts-mode . rainbow-delimiters-mode)
+         (clojure-ts-mode . paredit-mode)
+         (clojure-ts-mode . cider-mode)))
 #+end_src
 
 Support for the [[https://janet-lang.org/][Janet]] programming language:
@@ -484,7 +467,7 @@ My Emacs configuration file will be put in a standard location:
 #+begin_src makefile :tangle Makefile
 $(HOME)/.emacs.d/init.el: files/init.el
 	mkdir -p $(@D)
-	cp $^ $@
+	cp -f $^ $@
 #+end_src
 
 **** Misc

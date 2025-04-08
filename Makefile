@@ -13,4 +13,4 @@ $(HOME)/.gitignore: files/.gitignore
 
 $(HOME)/.emacs.d/init.el: files/init.el
 	mkdir -p $(@D)
-	cp $^ $@
+	cp -f $^ $@

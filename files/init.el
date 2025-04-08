@@ -15,6 +15,11 @@
 
   (setq windmove-wrap-around t)
 
+(setq treesit-language-source-alist
+      '((tsx "https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src")))
+
+(mapc #'treesit-install-language-grammar (mapcar #'car treesit-language-source-alist))
+
   (electric-indent-mode -1)
   (setq-default indent-tabs-mode nil)
   (setq-default tab-width 2)
@@ -96,26 +101,12 @@
   (use-package ef-themes
     :init (ef-themes-select 'ef-maris-dark))
 
-  (setq treesit-language-source-alist
-     '((bash "https://github.com/tree-sitter/tree-sitter-bash")
-       (css "https://github.com/tree-sitter/tree-sitter-css")
-       (elisp "https://github.com/Wilfred/tree-sitter-elisp")
-       (html "https://github.com/tree-sitter/tree-sitter-html")
-       (javascript "https://github.com/tree-sitter/tree-sitter-javascript" "master" "src")
-       (json "https://github.com/tree-sitter/tree-sitter-json")
-       (make "https://github.com/alemuller/tree-sitter-make")
-       (markdown "https://github.com/ikatyang/tree-sitter-markdown")
-       (python "https://github.com/tree-sitter/tree-sitter-python")
-       (tsx "https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src")
-       (typescript "https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src")
-       (yaml "https://github.com/ikatyang/tree-sitter-yaml")))
-
-  (mapc #'treesit-install-language-grammar (mapcar #'car treesit-language-source-alist))
-
 (use-package lsp-mode
   :commands lsp
   :init
   (setq lsp-keymap-prefix "C-c l")
+  :hook ((typescript-ts-mode . lsp)
+         (clojure-mode . lsp))
   :config
   (lsp-enable-which-key-integration t))
 
@@ -161,31 +152,26 @@
 
 (use-package wgrep)
 
-(add-to-list 'auto-mode-alist '("\\.[jt]s[x]?\\'" . tsx-ts-mode))
+(dolist (pair '(("\\.js\\'"  . typescript-ts-mode)
+                ("\\.ts\\'"  . typescript-ts-mode)
+                ("\\.jsx\\'" . typescript-ts-mode)
+                ("\\.tsx\\'" . typescript-ts-mode)))
+  (add-to-list 'auto-mode-alist pair))
 
-(add-hook 'tsx-ts-mode-hook 'lsp)
+(use-package add-node-modules-path
+  :hook ((typescript-ts-mode . add-node-modules-path)))
 
-  (use-package add-node-modules-path
-    :hook ((tsx-ts-mode . #'add-node-modules-path)))
+(use-package prettier-js
+  :hook ((typescript-ts-mode . prettier-js-mode)))
 
-  (use-package prettier-js
-    :hook ((tsx-ts-mode . prettier-js-mode)))
+(use-package cider)
+(use-package rainbow-delimiters)
+(use-package paredit)
 
-  (use-package cider)
-
-  (use-package clojure-mode
-    :mode (("\\.cljc?\\'" . clojure-mode)
-           ("\\.cljs\\'" . clojurescript-mode)))
-
-  (use-package rainbow-delimiters
-    :hook ((clojure-mode . rainbow-delimiters-mode)
-           (clojurescript-mode . rainbow-delimiters-mode)
-           (emacs-lisp-mode . rainbow-delimiters-mode)))
-
-  (use-package paredit
-    :hook ((clojure-mode . paredit-mode)
-           (clojurescript-mode . paredit-mode)
-           (emacs-lisp-mode . paredit-mode)))
+(use-package clojure-ts-mode
+  :hook ((clojure-ts-mode . rainbow-delimiters-mode)
+         (clojure-ts-mode . paredit-mode)
+         (clojure-ts-mode . cider-mode)))
 
   (use-package janet-mode
     :mode (("\\.janet\\'" . janet-mode))
