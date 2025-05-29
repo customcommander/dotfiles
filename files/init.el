@@ -28,6 +28,8 @@
   (setq read-process-output-max (* 1024 1024)) ;; 1mb
   (setq gc-cons-threshold 100000000)
 
+(global-set-key (kbd "C-x C-b") 'ibuffer)
+
   (defvar bootstrap-version)
 
   (let ((bootstrap-file
