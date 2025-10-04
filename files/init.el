@@ -16,7 +16,8 @@
   (setq windmove-wrap-around t)
 
 (setq treesit-language-source-alist
-      '((tsx "https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src")))
+      '((tsx "https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src")
+        (typescript "https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src")))
 
 (mapc #'treesit-install-language-grammar (mapcar #'car treesit-language-source-alist))
 
